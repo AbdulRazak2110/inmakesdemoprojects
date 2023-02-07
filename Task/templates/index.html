@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner" style=" background-color: #05ffb0;  width:100%;    height:200px;     margin-bottom:50px;">
+                <div class="banner-text" style="top:10%; left:50%; position:absolute;  transform:transform;">
+                    <h1> TASK</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+        <form method="post" class="p-3 shadow">
+            {% csrf_token %}
+            <div class="form-group">
+     <input type="text" class="form-control" name="task" placeholder="enter your task">
+            </div>
+                <div class="form-group">
+                    <input type="text" class="form-control"  name="priority" placeholder="enter the priority">
+                </div>
+            <div class="form-group">
+                    <input type="date" class="form-control"  name="date" placeholder="enter the task date">
+            </div>
+
+            <div style="padding-top: .5em;">
+               <input type="submit" class="btn btn-success" >
+            </div>
+
+
+        </form>
+
+        </div>
+        <div class="col-md-6">
+            <h4>Task to be Completed</h4>
+            {% for i in task1 %}
+            <div class="shadow card">
+                <div class="card-body">
+                    <h5 class="card-title"> {{i.name}}</h5>
+                    <p><b>{{i.priority}}</b></p>
+                     <p><b>{{i.date}}</b></p>
+                    <a  href="{% url 'delete' i.id %}" class="btn btn-warning">DONE</a>
+                     <a  href="{% url 'update' i.id %}" class="btn btn-warning">update</a>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+        </div>
+{% endblock %}
+
