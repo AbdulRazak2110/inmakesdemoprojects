@@ -130,20 +130,20 @@
 
         <div style="margin-bottom: 10px;">
             <label for="department">Department:</label>
-            <select id="department" name="department" required>
+             <select id="department" onchange="updateCourses()" required>
                 <option value="commerce">Commerce</option>
                 <option value="science">Science</option>
-                <option value="arts">Arts</option>
+               
             </select>
         </div>
 
         <div style="margin-bottom: 10px;">
             <label for="courses">Courses:</label>
             <select id="courses" name="courses" required>
-                <option value="bba">BBA</option>
-                <option value="bcom">BCom</option>
+                <option value="select">select course</option>
+<!--                 <option value="bcom">BCom</option>
                 <option value="bsc">BSc</option>
-                <option value="ba">BA</option>
+                <option value="ba">BA</option> -->
             </select>
         </div>
 
@@ -165,12 +165,45 @@
 
         <div>
             <input type="submit" value="Submit">
-            <input type="button" value="Logout">
+           
         </div>
 
 
           </form>
       </div>
     </div>
+      <script>
+        function updateCourses() {
+            var departmentSelect = document.getElementById("department");
+            var courseSelect = document.getElementById("course");
+
+            // Clear existing courses
+            courseSelect.innerHTML = "";
+
+            // Get selected department
+            var selectedDepartment = departmentSelect.value;
+
+            // Define courses based on the selected department
+            var courses = [];
+
+            if (selectedDepartment === "commerce") {
+                courses = ["BBA", "BCom", "MBA"];
+            } else if (selectedDepartment === "science") {
+                courses = ["BSc", "MSc", "PhD"];
+            }
+
+            // Populate courses dropdown
+            courses.forEach(function(course) {
+                var option = document.createElement("option");
+                option.text = course;
+                courseSelect.add(option);
+            });
+
+            // Enable the courses dropdown
+            courseSelect.disabled = false;
+        }
+    </script>
+
+  
 </body>
 </html>
